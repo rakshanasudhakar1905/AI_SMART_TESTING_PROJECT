@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Test Execution</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<header>
+
+    <h1>Automated Test Execution</h1>
+
+    <nav>
+
+        <a href="/">Dashboard</a>
+
+        <a href="/test-cases">Test Cases</a>
+
+        <a href="/execution">Execution</a>
+
+        <a href="/reports">Reports</a>
+
+    </nav>
+
+</header>
+
+
+<main>
+
+    <section class="card">
+
+        <h2>Execute Automated Tests</h2>
+
+        <p>
+            This module executes PyTest test cases automatically.
+        </p>
+
+        <button onclick="runTests()">
+            Run Tests
+        </button>
+
+        <div id="executionResults"></div>
+
+    </section>
+
+</main>
+
+
+<script src="{{ url_for('static', filename='script.js') }}">
+</script>
+
+</body>
+
+</html>
