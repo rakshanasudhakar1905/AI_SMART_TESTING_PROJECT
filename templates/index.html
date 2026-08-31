@@ -1,1176 +1,239 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
 
-    <!-- Responsive for mobile -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
     <title>AI Smart Testing QA</title>
 
-    <!-- Google Font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet"
-    >
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
 
-    <!-- Font Awesome Icons -->
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-    >
-
-    <!-- Your CSS -->
-    <link
-        rel="stylesheet"
-        href="{{ url_for('static', filename='style.css') }}"
-    >
 </head>
 
 <body>
 
-<!-- =========================
-     MOBILE OVERLAY
-========================= -->
-<div class="mobile-overlay" id="mobileOverlay"></div>
+<header>
 
+    <h1>AI-Based Smart Software Testing</h1>
 
-<!-- =========================
-     SIDEBAR
-========================= -->
-<aside class="sidebar" id="sidebar">
+    <p>
+        Quality Assurance Platform
+    </p>
 
-    <div class="logo-section">
+    <nav>
 
-        <div class="logo-icon">
-            <i class="fa-solid fa-brain"></i>
-        </div>
+        <a href="/">Dashboard</a>
 
-        <div class="logo-text">
-            <h2>AI Smart</h2>
-            <span>Testing QA</span>
-        </div>
+        <a href="/test-cases">Test Cases</a>
 
-    </div>
+        <a href="/execution">Execution</a>
 
-
-    <!-- Navigation -->
-    <nav class="sidebar-nav">
-
-        <p class="nav-title">MAIN MENU</p>
-
-        <a href="{{ url_for('index') }}" class="nav-item active">
-            <i class="fa-solid fa-chart-pie"></i>
-            <span>Dashboard</span>
-        </a>
-
-        <a href="{{ url_for('test_cases') }}" class="nav-item">
-            <i class="fa-solid fa-flask"></i>
-            <span>Test Generator</span>
-        </a>
-
-        <a href="{{ url_for('execution') }}" class="nav-item">
-            <i class="fa-solid fa-play"></i>
-            <span>Test Execution</span>
-        </a>
-
-        <a href="{{ url_for('reports') }}" class="nav-item">
-            <i class="fa-solid fa-file-lines"></i>
-            <span>Reports</span>
-        </a>
-
-
-        <p class="nav-title second-title">AI TOOLS</p>
-
-        <a href="{{ url_for('test_cases') }}" class="nav-item">
-            <i class="fa-solid fa-wand-magic-sparkles"></i>
-            <span>AI Test Generator</span>
-        </a>
-
-        <a href="{{ url_for('reports') }}" class="nav-item">
-            <i class="fa-solid fa-robot"></i>
-            <span>Defect Predictor</span>
-        </a>
-
-
-        <p class="nav-title second-title">SYSTEM</p>
-
-        <a href="#" class="nav-item" onclick="showNotification('Settings coming soon!')">
-            <i class="fa-solid fa-gear"></i>
-            <span>Settings</span>
-        </a>
+        <a href="/reports">Reports</a>
 
     </nav>
 
-
-    <!-- Sidebar Bottom -->
-    <div class="sidebar-bottom">
-
-        <div class="system-status">
-
-            <span class="status-dot"></span>
-
-            <div>
-                <strong>System Online</strong>
-                <small>AI engine active</small>
-            </div>
-
-        </div>
-
-        <div class="version">
-            AI-Smart-QA v1.0
-        </div>
-
-    </div>
-
-</aside>
+</header>
 
 
-<!-- =========================
-     MAIN CONTENT
-========================= -->
-<main class="main-content">
+<main>
+
+    <!-- MODULE 1 -->
+
+    <section class="card">
+
+        <h2>Module 1 - Intelligent Test Case Generation</h2>
+
+        <p>
+            Enter a software requirement to generate
+            positive, negative, edge and boundary test cases.
+        </p>
+
+        <textarea
+            id="requirement"
+            placeholder="Example: User should be able to login with valid username and password."
+        ></textarea>
+
+        <button onclick="generateTests()">
+            Generate Test Cases
+        </button>
+
+        <div id="testResults"></div>
+
+    </section>
 
 
-    <!-- =========================
-         TOP BAR
-    ========================= -->
-    <header class="topbar">
+    <!-- MODULE 2 -->
 
-        <div class="topbar-left">
+    <section class="card">
 
-            <button
-                class="menu-button"
-                id="menuButton"
-                aria-label="Open menu"
-            >
-                <i class="fa-solid fa-bars"></i>
-            </button>
+        <h2>Module 2 - Automated Test Execution</h2>
 
-            <div>
-                <h1>Dashboard</h1>
-                <p>AI-powered software testing & quality assurance</p>
-            </div>
+        <p>
+            Execute PyTest test cases automatically.
+        </p>
 
-        </div>
+        <button onclick="runTests()">
+            Run Automated Tests
+        </button>
+
+        <div id="executionResults"></div>
+
+    </section>
 
 
-        <div class="topbar-right">
+    <!-- MODULE 3 -->
 
-            <!-- Search -->
-            <div class="search-box">
+    <section class="card">
 
-                <i class="fa-solid fa-magnifying-glass"></i>
+        <h2>Module 3 - AI Defect Prediction</h2>
 
-                <input
-                    type="text"
-                    id="dashboardSearch"
-                    placeholder="Search..."
-                    onkeyup="searchDashboard()"
-                >
+        <div class="form-grid">
 
-            </div>
-
-
-            <!-- Notification -->
-            <button
-                class="icon-button"
-                onclick="showNotification('No new notifications')"
-                aria-label="Notifications"
+            <input
+                id="complexity"
+                type="number"
+                placeholder="Code Complexity"
             >
 
-                <i class="fa-regular fa-bell"></i>
-
-                <span class="notification-dot"></span>
-
-            </button>
-
-
-            <!-- Profile -->
-            <div class="profile">
-
-                <div class="profile-avatar">
-                    QA
-                </div>
-
-                <div class="profile-info">
-                    <strong>QA Admin</strong>
-                    <span>Administrator</span>
-                </div>
-
-            </div>
-
-        </div>
-
-    </header>
-
-
-    <!-- =========================
-         PAGE CONTENT
-    ========================= -->
-    <section class="dashboard-content">
-
-
-        <!-- Welcome -->
-        <div class="welcome-section">
-
-            <div>
-
-                <p class="welcome-label">
-                    <i class="fa-solid fa-sparkles"></i>
-                    AI QUALITY CENTER
-                </p>
-
-                <h2>
-                    Welcome to AI Smart Testing
-                </h2>
-
-                <p>
-                    Monitor your software quality, generate intelligent
-                    test cases and predict potential defects.
-                </p>
-
-            </div>
-
-
-            <a
-                href="{{ url_for('test_cases') }}"
-                class="primary-button"
+            <input
+                id="changes"
+                type="number"
+                placeholder="Number of Changes"
             >
-                <i class="fa-solid fa-wand-magic-sparkles"></i>
-                Generate Test Cases
-            </a>
+
+            <input
+                id="previous_bugs"
+                type="number"
+                placeholder="Previous Bugs"
+            >
+
+            <input
+                id="lines_of_code"
+                type="number"
+                placeholder="Lines of Code"
+            >
+
+            <input
+                id="test_failures"
+                type="number"
+                placeholder="Test Failures"
+            >
 
         </div>
 
+        <button onclick="predictDefect()">
+            Predict Defect Risk
+        </button>
 
-        <!-- =========================
-             STAT CARDS
-        ========================= -->
-        <div class="stats-grid">
+        <div id="predictionResults"></div>
 
-
-            <!-- Total Tests -->
-            <div class="stat-card">
-
-                <div class="stat-card-top">
-
-                    <div class="stat-icon purple">
-                        <i class="fa-solid fa-vial"></i>
-                    </div>
-
-                    <span class="stat-badge neutral">
-                        <i class="fa-solid fa-chart-line"></i>
-                        Active
-                    </span>
-
-                </div>
-
-                <div class="stat-value" id="totalTests">
-                    {{ total_tests|default(0) }}
-                </div>
-
-                <div class="stat-label">
-                    Total Test Cases
-                </div>
-
-                <div class="stat-footer">
-                    <i class="fa-solid fa-arrow-up"></i>
-                    Automated testing
-                </div>
-
-            </div>
+    </section>
 
 
-            <!-- Passed -->
-            <div class="stat-card">
+    <!-- MODULE 4 -->
 
-                <div class="stat-card-top">
+    <section class="card">
 
-                    <div class="stat-icon green">
-                        <i class="fa-solid fa-circle-check"></i>
-                    </div>
+        <h2>Module 4 - QA Dashboard</h2>
 
-                    <span class="stat-badge success">
-                        Healthy
-                    </span>
-
-                </div>
-
-                <div class="stat-value" id="passedTests">
-                    {{ passed_tests|default(0) }}
-                </div>
-
-                <div class="stat-label">
-                    Passed Tests
-                </div>
-
-                <div class="stat-footer success-text">
-                    <i class="fa-solid fa-check"></i>
-                    Successful executions
-                </div>
-
-            </div>
-
-
-            <!-- Failed -->
-            <div class="stat-card">
-
-                <div class="stat-card-top">
-
-                    <div class="stat-icon red">
-                        <i class="fa-solid fa-circle-xmark"></i>
-                    </div>
-
-                    <span class="stat-badge danger">
-                        Attention
-                    </span>
-
-                </div>
-
-                <div class="stat-value" id="failedTests">
-                    {{ failed_tests|default(0) }}
-                </div>
-
-                <div class="stat-label">
-                    Failed Tests
-                </div>
-
-                <div class="stat-footer danger-text">
-                    <i class="fa-solid fa-triangle-exclamation"></i>
-                    Requires review
-                </div>
-
-            </div>
-
-
-            <!-- Defects -->
-            <div class="stat-card">
-
-                <div class="stat-card-top">
-
-                    <div class="stat-icon orange">
-                        <i class="fa-solid fa-bug"></i>
-                    </div>
-
-                    <span class="stat-badge warning">
-                        AI Analysis
-                    </span>
-
-                </div>
-
-                <div class="stat-value" id="defectCount">
-                    {{ defects|default(0) }}
-                </div>
-
-                <div class="stat-label">
-                    Detected Defects
-                </div>
-
-                <div class="stat-footer warning-text">
-                    <i class="fa-solid fa-robot"></i>
-                    AI-powered detection
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- =========================
-             MAIN DASHBOARD GRID
-        ========================= -->
         <div class="dashboard-grid">
 
+            <div class="metric">
 
-            <!-- =========================
-                 EXECUTION CHART
-            ========================= -->
-            <div class="dashboard-card chart-card">
+                <h3>Total Tests</h3>
 
-                <div class="card-header">
-
-                    <div>
-
-                        <h3>
-                            Test Execution Overview
-                        </h3>
-
-                        <p>
-                            Recent testing performance
-                        </p>
-
-                    </div>
-
-                    <select id="chartPeriod" onchange="changeChartPeriod()">
-
-                        <option value="7">Last 7 days</option>
-                        <option value="14">Last 14 days</option>
-                        <option value="30">Last 30 days</option>
-
-                    </select>
-
-                </div>
-
-
-                <!-- Simple Chart -->
-                <div class="chart-container">
-
-                    <div class="y-axis">
-
-                        <span>100</span>
-                        <span>75</span>
-                        <span>50</span>
-                        <span>25</span>
-                        <span>0</span>
-
-                    </div>
-
-
-                    <div class="chart-area">
-
-                        <div class="grid-line line-1"></div>
-                        <div class="grid-line line-2"></div>
-                        <div class="grid-line line-3"></div>
-                        <div class="grid-line line-4"></div>
-                        <div class="grid-line line-5"></div>
-
-
-                        <div class="bars">
-
-                            <div class="bar-wrapper">
-
-                                <div
-                                    class="bar passed-bar"
-                                    style="height: 72%;"
-                                    title="72 tests passed"
-                                ></div>
-
-                                <span>Mon</span>
-
-                            </div>
-
-
-                            <div class="bar-wrapper">
-
-                                <div
-                                    class="bar passed-bar"
-                                    style="height: 84%;"
-                                    title="84 tests passed"
-                                ></div>
-
-                                <span>Tue</span>
-
-                            </div>
-
-
-                            <div class="bar-wrapper">
-
-                                <div
-                                    class="bar passed-bar"
-                                    style="height: 64%;"
-                                    title="64 tests passed"
-                                ></div>
-
-                                <span>Wed</span>
-
-                            </div>
-
-
-                            <div class="bar-wrapper">
-
-                                <div
-                                    class="bar passed-bar"
-                                    style="height: 91%;"
-                                    title="91 tests passed"
-                                ></div>
-
-                                <span>Thu</span>
-
-                            </div>
-
-
-                            <div class="bar-wrapper">
-
-                                <div
-                                    class="bar passed-bar"
-                                    style="height: 78%;"
-                                    title="78 tests passed"
-                                ></div>
-
-                                <span>Fri</span>
-
-                            </div>
-
-
-                            <div class="bar-wrapper">
-
-                                <div
-                                    class="bar passed-bar"
-                                    style="height: 95%;"
-                                    title="95 tests passed"
-                                ></div>
-
-                                <span>Sat</span>
-
-                            </div>
-
-
-                            <div class="bar-wrapper">
-
-                                <div
-                                    class="bar passed-bar"
-                                    style="height: 88%;"
-                                    title="88 tests passed"
-                                ></div>
-
-                                <span>Sun</span>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <div class="chart-legend">
-
-                    <span>
-                        <i class="legend-dot passed"></i>
-                        Passed
-                    </span>
-
-                    <span>
-                        <i class="legend-dot failed"></i>
-                        Failed
-                    </span>
-
-                </div>
+                <span id="totalTests">
+                    0
+                </span>
 
             </div>
 
 
-            <!-- =========================
-                 DEFECT RISK
-            ========================= -->
-            <div class="dashboard-card risk-card">
+            <div class="metric">
 
-                <div class="card-header">
+                <h3>Passed</h3>
 
-                    <div>
+                <span id="passedTests">
+                    0
+                </span>
 
-                        <h3>
-                            AI Defect Risk
-                        </h3>
-
-                        <p>
-                            Current project risk analysis
-                        </p>
-
-                    </div>
-
-                    <i class="fa-solid fa-robot card-header-icon"></i>
-
-                </div>
+            </div>
 
 
-                <div class="risk-content">
+            <div class="metric">
 
-                    <div class="risk-circle">
+                <h3>Failed</h3>
 
-                        <div class="risk-circle-inner">
+                <span id="failedTests">
+                    0
+                </span>
 
-                            <strong>
-                                {{ defect_risk|default('LOW') }}
-                            </strong>
-
-                            <span>
-                                Current Risk
-                            </span>
-
-                        </div>
-
-                    </div>
+            </div>
 
 
-                    <div class="risk-list">
+            <div class="metric">
 
-                        <div class="risk-item">
+                <h3>Errors</h3>
 
-                            <span class="risk-indicator high"></span>
-
-                            <div>
-                                <strong>High Risk</strong>
-                                <small>
-                                    {{ high_risk|default(0) }} modules
-                                </small>
-                            </div>
-
-                        </div>
-
-
-                        <div class="risk-item">
-
-                            <span class="risk-indicator medium"></span>
-
-                            <div>
-                                <strong>Medium Risk</strong>
-                                <small>
-                                    {{ medium_risk|default(0) }} modules
-                                </small>
-                            </div>
-
-                        </div>
-
-
-                        <div class="risk-item">
-
-                            <span class="risk-indicator low"></span>
-
-                            <div>
-                                <strong>Low Risk</strong>
-                                <small>
-                                    {{ low_risk|default(0) }} modules
-                                </small>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <a
-                    href="{{ url_for('reports') }}"
-                    class="secondary-button"
-                >
-                    View AI Analysis
-                    <i class="fa-solid fa-arrow-right"></i>
-                </a>
+                <span id="errorTests">
+                    0
+                </span>
 
             </div>
 
         </div>
 
 
-        <!-- =========================
-             QUICK ACTIONS
-        ========================= -->
-        <div class="section-heading">
+        <h3>Defect Risk</h3>
 
-            <div>
+        <div class="risk-grid">
 
-                <h3>Quick Actions</h3>
+            <div class="risk high">
 
-                <p>
-                    Access the most important testing tools
-                </p>
+                HIGH
+
+                <span id="highRisk">
+                    0
+                </span>
+
+            </div>
+
+            <div class="risk medium">
+
+                MEDIUM
+
+                <span id="mediumRisk">
+                    0
+                </span>
+
+            </div>
+
+            <div class="risk low">
+
+                LOW
+
+                <span id="lowRisk">
+                    0
+                </span>
 
             </div>
 
         </div>
-
-
-        <div class="quick-actions">
-
-
-            <a
-                href="{{ url_for('test_cases') }}"
-                class="action-card"
-            >
-
-                <div class="action-icon purple">
-                    <i class="fa-solid fa-wand-magic-sparkles"></i>
-                </div>
-
-                <div>
-
-                    <h4>Generate Tests</h4>
-
-                    <p>
-                        Create AI-powered test cases
-                    </p>
-
-                </div>
-
-                <i class="fa-solid fa-arrow-right action-arrow"></i>
-
-            </a>
-
-
-            <a
-                href="{{ url_for('execution') }}"
-                class="action-card"
-            >
-
-                <div class="action-icon blue">
-                    <i class="fa-solid fa-play"></i>
-                </div>
-
-                <div>
-
-                    <h4>Run Tests</h4>
-
-                    <p>
-                        Execute automated test suites
-                    </p>
-
-                </div>
-
-                <i class="fa-solid fa-arrow-right action-arrow"></i>
-
-            </a>
-
-
-            <a
-                href="{{ url_for('reports') }}"
-                class="action-card"
-            >
-
-                <div class="action-icon orange">
-                    <i class="fa-solid fa-bug"></i>
-                </div>
-
-                <div>
-
-                    <h4>Predict Defects</h4>
-
-                    <p>
-                        Analyze potential software defects
-                    </p>
-
-                </div>
-
-                <i class="fa-solid fa-arrow-right action-arrow"></i>
-
-            </a>
-
-
-            <a
-                href="{{ url_for('reports') }}"
-                class="action-card"
-            >
-
-                <div class="action-icon green">
-                    <i class="fa-solid fa-chart-column"></i>
-                </div>
-
-                <div>
-
-                    <h4>View Reports</h4>
-
-                    <p>
-                        Review testing performance
-                    </p>
-
-                </div>
-
-                <i class="fa-solid fa-arrow-right action-arrow"></i>
-
-            </a>
-
-        </div>
-
-
-        <!-- =========================
-             RECENT ACTIVITY
-        ========================= -->
-        <div class="dashboard-card activity-card">
-
-            <div class="card-header">
-
-                <div>
-
-                    <h3>Recent Testing Activity</h3>
-
-                    <p>
-                        Latest actions performed by the QA system
-                    </p>
-
-                </div>
-
-                <a
-                    href="{{ url_for('reports') }}"
-                    class="view-all"
-                >
-                    View All
-                </a>
-
-            </div>
-
-
-            <div class="activity-table">
-
-                <div class="table-header">
-
-                    <span>Test / Module</span>
-                    <span>Type</span>
-                    <span>Status</span>
-                    <span>Time</span>
-
-                </div>
-
-
-                <div class="activity-row">
-
-                    <div class="test-name">
-
-                        <div class="mini-icon purple">
-                            <i class="fa-solid fa-right-to-bracket"></i>
-                        </div>
-
-                        <div>
-                            <strong>Login Authentication</strong>
-                            <small>TC-001</small>
-                        </div>
-
-                    </div>
-
-                    <span class="type-label">
-                        Functional
-                    </span>
-
-                    <span class="status-pill passed">
-                        <i class="fa-solid fa-check"></i>
-                        Passed
-                    </span>
-
-                    <span class="time">
-                        2 min ago
-                    </span>
-
-                </div>
-
-
-                <div class="activity-row">
-
-                    <div class="test-name">
-
-                        <div class="mini-icon blue">
-                            <i class="fa-solid fa-credit-card"></i>
-                        </div>
-
-                        <div>
-                            <strong>Payment Processing</strong>
-                            <small>TC-014</small>
-                        </div>
-
-                    </div>
-
-                    <span class="type-label">
-                        Integration
-                    </span>
-
-                    <span class="status-pill passed">
-                        <i class="fa-solid fa-check"></i>
-                        Passed
-                    </span>
-
-                    <span class="time">
-                        8 min ago
-                    </span>
-
-                </div>
-
-
-                <div class="activity-row">
-
-                    <div class="test-name">
-
-                        <div class="mini-icon orange">
-                            <i class="fa-solid fa-user"></i>
-                        </div>
-
-                        <div>
-                            <strong>User Registration</strong>
-                            <small>TC-021</small>
-                        </div>
-
-                    </div>
-
-                    <span class="type-label">
-                        Validation
-                    </span>
-
-                    <span class="status-pill failed">
-                        <i class="fa-solid fa-xmark"></i>
-                        Failed
-                    </span>
-
-                    <span class="time">
-                        15 min ago
-                    </span>
-
-                </div>
-
-
-                <div class="activity-row">
-
-                    <div class="test-name">
-
-                        <div class="mini-icon green">
-                            <i class="fa-solid fa-database"></i>
-                        </div>
-
-                        <div>
-                            <strong>Database Connection</strong>
-                            <small>TC-027</small>
-                        </div>
-
-                    </div>
-
-                    <span class="type-label">
-                        System
-                    </span>
-
-                    <span class="status-pill passed">
-                        <i class="fa-solid fa-check"></i>
-                        Passed
-                    </span>
-
-                    <span class="time">
-                        23 min ago
-                    </span>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- =========================
-             FOOTER
-        ========================= -->
-        <footer class="dashboard-footer">
-
-            <span>
-                © 2026 AI Smart Testing QA
-            </span>
-
-            <span>
-                AI-powered Software Quality Assurance
-            </span>
-
-        </footer>
 
     </section>
 
 </main>
 
 
-<!-- =========================
-     NOTIFICATION
-========================= -->
-<div class="toast" id="toast">
-
-    <i class="fa-solid fa-circle-check"></i>
-
-    <span id="toastMessage">
-        Notification
-    </span>
-
-</div>
-
-
-<!-- =========================
-     JAVASCRIPT
-========================= -->
-<script>
-
-    /* =========================
-       MOBILE SIDEBAR
-    ========================= */
-
-    const menuButton = document.getElementById("menuButton");
-    const sidebar = document.getElementById("sidebar");
-    const mobileOverlay = document.getElementById("mobileOverlay");
-
-    if (menuButton) {
-
-        menuButton.addEventListener("click", function () {
-
-            sidebar.classList.toggle("mobile-open");
-            mobileOverlay.classList.toggle("active");
-
-        });
-
-    }
-
-
-    if (mobileOverlay) {
-
-        mobileOverlay.addEventListener("click", function () {
-
-            sidebar.classList.remove("mobile-open");
-            mobileOverlay.classList.remove("active");
-
-        });
-
-    }
-
-
-    /* =========================
-       TOAST NOTIFICATION
-    ========================= */
-
-    function showNotification(message) {
-
-        const toast = document.getElementById("toast");
-        const toastMessage = document.getElementById("toastMessage");
-
-        toastMessage.textContent = message;
-
-        toast.classList.add("show");
-
-        setTimeout(function () {
-
-            toast.classList.remove("show");
-
-        }, 3000);
-
-    }
-
-
-    /* =========================
-       SEARCH
-    ========================= */
-
-    function searchDashboard() {
-
-        const input =
-            document.getElementById("dashboardSearch");
-
-        const query =
-            input.value.toLowerCase().trim();
-
-        const cards =
-            document.querySelectorAll(
-                ".action-card, .activity-row"
-            );
-
-        cards.forEach(function(card) {
-
-            const text =
-                card.textContent.toLowerCase();
-
-            if (query === "" || text.includes(query)) {
-
-                card.style.display = "";
-
-            } else {
-
-                card.style.display = "none";
-
-            }
-
-        });
-
-    }
-
-
-    /* =========================
-       CHART PERIOD
-    ========================= */
-
-    function changeChartPeriod() {
-
-        const period =
-            document.getElementById("chartPeriod").value;
-
-        showNotification(
-            "Showing test activity for the last " +
-            period +
-            " days"
-        );
-
-    }
-
-
-    /* =========================
-       ACTIVE NAVIGATION
-    ========================= */
-
-    const navItems =
-        document.querySelectorAll(".nav-item");
-
-    navItems.forEach(function(item) {
-
-        item.addEventListener("click", function() {
-
-            navItems.forEach(function(nav) {
-
-                nav.classList.remove("active");
-
-            });
-
-            this.classList.add("active");
-
-        });
-
-    });
-
-
-    /* =========================
-       ANIMATE STAT NUMBERS
-    ========================= */
-
-    function animateNumbers() {
-
-        const counters =
-            document.querySelectorAll(".stat-value");
-
-        counters.forEach(function(counter) {
-
-            const target =
-                parseInt(counter.textContent) || 0;
-
-            let current = 0;
-
-            const increment =
-                Math.max(1, Math.ceil(target / 30));
-
-            const timer =
-                setInterval(function() {
-
-                    current += increment;
-
-                    if (current >= target) {
-
-                        current = target;
-
-                        clearInterval(timer);
-
-                    }
-
-                    counter.textContent = current;
-
-                }, 30);
-
-        });
-
-    }
-
-
-    /* =========================
-       PAGE LOAD
-    ========================= */
-
-    document.addEventListener(
-        "DOMContentLoaded",
-        function() {
-
-            animateNumbers();
-
-        }
-    );
-
+<script src="{{ url_for('static', filename='script.js') }}">
 </script>
 
 </body>
+
 </html>
