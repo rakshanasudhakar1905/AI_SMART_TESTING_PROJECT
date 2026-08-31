@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>QA Reports</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<header>
+
+    <h1>Quality Assurance Reports</h1>
+
+    <nav>
+
+        <a href="/">Dashboard</a>
+
+        <a href="/test-cases">Test Cases</a>
+
+        <a href="/execution">Execution</a>
+
+        <a href="/reports">Reports</a>
+
+    </nav>
+
+</header>
+
+
+<main>
+
+    <section class="card">
+
+        <h2>Testing Summary</h2>
+
+        <div id="reportSummary">
+
+            Loading report...
+
+        </div>
+
+    </section>
+
+
+    <section class="card">
+
+        <h2>Latest Test Executions</h2>
+
+        <div id="latestResults"></div>
+
+    </section>
+
+
+    <section class="card">
+
+        <h2>Latest Defect Predictions</h2>
+
+        <div id="latestPredictions"></div>
+
+    </section>
+
+</main>
+
+
+<script src="{{ url_for('static', filename='script.js') }}">
+</script>
+
+</body>
+
+</html>
