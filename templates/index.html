@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>AI Smart Testing QA</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<header>
+
+    <h1>AI-Based Smart Software Testing</h1>
+
+    <p>
+        Quality Assurance Platform
+    </p>
+
+    <nav>
+
+        <a href="/">Dashboard</a>
+
+        <a href="/test-cases">Test Cases</a>
+
+        <a href="/execution">Execution</a>
+
+        <a href="/reports">Reports</a>
+
+    </nav>
+
+</header>
+
+
+<main>
+
+    <!-- MODULE 1 -->
+
+    <section class="card">
+
+        <h2>Module 1 - Intelligent Test Case Generation</h2>
+
+        <p>
+            Enter a software requirement to generate
+            positive, negative, edge and boundary test cases.
+        </p>
+
+        <textarea
+            id="requirement"
+            placeholder="Example: User should be able to login with valid username and password."
+        ></textarea>
+
+        <button onclick="generateTests()">
+            Generate Test Cases
+        </button>
+
+        <div id="testResults"></div>
+
+    </section>
+
+
+    <!-- MODULE 2 -->
+
+    <section class="card">
+
+        <h2>Module 2 - Automated Test Execution</h2>
+
+        <p>
+            Execute PyTest test cases automatically.
+        </p>
+
+        <button onclick="runTests()">
+            Run Automated Tests
+        </button>
+
+        <div id="executionResults"></div>
+
+    </section>
+
+
+    <!-- MODULE 3 -->
+
+    <section class="card">
+
+        <h2>Module 3 - AI Defect Prediction</h2>
+
+        <div class="form-grid">
+
+            <input
+                id="complexity"
+                type="number"
+                placeholder="Code Complexity"
+            >
+
+            <input
+                id="changes"
+                type="number"
+                placeholder="Number of Changes"
+            >
+
+            <input
+                id="previous_bugs"
+                type="number"
+                placeholder="Previous Bugs"
+            >
+
+            <input
+                id="lines_of_code"
+                type="number"
+                placeholder="Lines of Code"
+            >
+
+            <input
+                id="test_failures"
+                type="number"
+                placeholder="Test Failures"
+            >
+
+        </div>
+
+        <button onclick="predictDefect()">
+            Predict Defect Risk
+        </button>
+
+        <div id="predictionResults"></div>
+
+    </section>
+
+
+    <!-- MODULE 4 -->
+
+    <section class="card">
+
+        <h2>Module 4 - QA Dashboard</h2>
+
+        <div class="dashboard-grid">
+
+            <div class="metric">
+
+                <h3>Total Tests</h3>
+
+                <span id="totalTests">
+                    0
+                </span>
+
+            </div>
+
+
+            <div class="metric">
+
+                <h3>Passed</h3>
+
+                <span id="passedTests">
+                    0
+                </span>
+
+            </div>
+
+
+            <div class="metric">
+
+                <h3>Failed</h3>
+
+                <span id="failedTests">
+                    0
+                </span>
+
+            </div>
+
+
+            <div class="metric">
+
+                <h3>Errors</h3>
+
+                <span id="errorTests">
+                    0
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <h3>Defect Risk</h3>
+
+        <div class="risk-grid">
+
+            <div class="risk high">
+
+                HIGH
+
+                <span id="highRisk">
+                    0
+                </span>
+
+            </div>
+
+            <div class="risk medium">
+
+                MEDIUM
+
+                <span id="mediumRisk">
+                    0
+                </span>
+
+            </div>
+
+            <div class="risk low">
+
+                LOW
+
+                <span id="lowRisk">
+                    0
+                </span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<script src="{{ url_for('static', filename='script.js') }}">
+</script>
+
+</body>
+
+</html>
