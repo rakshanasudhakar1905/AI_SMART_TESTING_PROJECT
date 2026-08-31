@@ -1,0 +1,15 @@
+services:
+
+  smart-testing:
+
+    build: .
+
+    container_name: ai-smart-testing
+
+    ports:
+      - "5000:5000"
+
+    volumes:
+      - .:/app
+
+    restart: unless-stopped
