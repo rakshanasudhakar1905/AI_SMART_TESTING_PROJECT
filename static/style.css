@@ -1,0 +1,342 @@
+* {
+    box-sizing: border-box;
+}
+
+
+body {
+    margin: 0;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background: #f4f6f8;
+
+    color: #222;
+}
+
+
+header {
+    background: #172b4d;
+
+    color: white;
+
+    padding: 25px;
+
+    text-align: center;
+}
+
+
+header h1 {
+    margin: 0;
+
+    font-size: 30px;
+}
+
+
+header p {
+    margin: 8px 0 20px;
+}
+
+
+nav {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 20px;
+
+    flex-wrap: wrap;
+}
+
+
+nav a {
+    color: white;
+
+    text-decoration: none;
+
+    padding: 8px 15px;
+
+    border-radius: 5px;
+
+    background: #29466f;
+}
+
+
+nav a:hover {
+    background: #3e6598;
+}
+
+
+main {
+    width: 90%;
+
+    max-width: 1200px;
+
+    margin: 30px auto;
+}
+
+
+.card {
+    background: white;
+
+    padding: 25px;
+
+    margin-bottom: 25px;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 3px 10px
+        rgba(0, 0, 0, 0.08);
+}
+
+
+.card h2 {
+    margin-top: 0;
+
+    color: #172b4d;
+}
+
+
+textarea {
+    width: 100%;
+
+    min-height: 120px;
+
+    padding: 15px;
+
+    border: 1px solid #ccc;
+
+    border-radius: 8px;
+
+    resize: vertical;
+
+    font-size: 15px;
+
+    margin-bottom: 15px;
+}
+
+
+button {
+    background: #172b4d;
+
+    color: white;
+
+    border: none;
+
+    padding: 12px 20px;
+
+    border-radius: 7px;
+
+    cursor: pointer;
+
+    font-size: 15px;
+}
+
+
+button:hover {
+    background: #29466f;
+}
+
+
+.form-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(180px, 1fr));
+
+    gap: 15px;
+
+    margin-bottom: 20px;
+}
+
+
+input {
+    padding: 12px;
+
+    border: 1px solid #ccc;
+
+    border-radius: 6px;
+
+    font-size: 14px;
+}
+
+
+.dashboard-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(180px, 1fr));
+
+    gap: 20px;
+}
+
+
+.metric {
+    padding: 25px;
+
+    text-align: center;
+
+    background: #eef2f7;
+
+    border-radius: 10px;
+}
+
+
+.metric h3 {
+    margin-top: 0;
+
+    font-size: 16px;
+}
+
+
+.metric span {
+    display: block;
+
+    font-size: 32px;
+
+    font-weight: bold;
+
+    margin-top: 10px;
+}
+
+
+.risk-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 15px;
+}
+
+
+.risk {
+    padding: 20px;
+
+    border-radius: 10px;
+
+    text-align: center;
+
+    font-weight: bold;
+}
+
+
+.risk span {
+    display: block;
+
+    font-size: 28px;
+
+    margin-top: 8px;
+}
+
+
+.high {
+    background: #ffdede;
+
+    color: #a30000;
+}
+
+
+.medium {
+    background: #fff0c9;
+
+    color: #8a5a00;
+}
+
+
+.low {
+    background: #dff5e4;
+
+    color: #126b2f;
+}
+
+
+.test-table {
+    width: 100%;
+
+    border-collapse: collapse;
+
+    margin-top: 20px;
+}
+
+
+.test-table th,
+.test-table td {
+    padding: 12px;
+
+    border: 1px solid #ddd;
+
+    text-align: left;
+}
+
+
+.test-table th {
+    background: #172b4d;
+
+    color: white;
+}
+
+
+.result-box {
+    margin-top: 20px;
+
+    padding: 20px;
+
+    border-radius: 8px;
+
+    background: #f2f5f8;
+}
+
+
+.success {
+    color: #147a32;
+
+    font-weight: bold;
+}
+
+
+.failure {
+    color: #b00020;
+
+    font-weight: bold;
+}
+
+
+.risk-result {
+    font-size: 25px;
+
+    font-weight: bold;
+
+    margin-top: 20px;
+}
+
+
+pre {
+    background: #202124;
+
+    color: white;
+
+    padding: 15px;
+
+    border-radius: 8px;
+
+    overflow-x: auto;
+
+    white-space: pre-wrap;
+}
+
+
+@media (max-width: 700px) {
+
+    .risk-grid {
+        grid-template-columns: 1fr;
+    }
+
+    main {
+        width: 95%;
+    }
+
+}
